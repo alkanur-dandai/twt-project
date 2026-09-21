@@ -1,0 +1,285 @@
+[
+  {
+    "Barangays": "Bongao Poblacion",
+    "type": "Urban",
+    "Population": "18,571",
+    "Total voters": "5,779",
+   "lat":  5.0316675,
+    "lng": 119.7726296
+  },
+  {
+    "Barangays": "Simandagit",
+    "type": "Urban",
+    "Population": "10,028",
+    "Total voters": "5,560",
+    "lat":  5.0134596,
+    "lng":  119.7699845
+  },
+  {
+    "Barangays": "Lamion",
+    "type": "Urban",
+    "Population": "9,343",
+    "Total voters": "6,113"
+    ,
+    "lat":  5.0264339,
+    "lng":   119.7775893
+  },
+  {
+    "Barangays": "Tubig-Boh",
+    "type": "Urban",
+    "Population": "8,815",
+    "Total voters": "5,519"
+    ,
+    "lat":  5.01944333,
+    "lng":   119.7691394
+  },
+  {
+    "Barangays": "Nalil",
+    "type": "Urban",
+    "Population": "8,740",
+    "Total voters": "4,474",
+    "lat":  5.025476,
+    "lng": 119.7566284
+  },
+  {
+    "Barangays": "Pag-asa",
+    "type": "Urban",
+    "Population": "8,336",
+    "Total voters": "4,703",
+    "lat":  5.0257586,
+    "lng":   119.7692262
+  },
+  {
+    "Barangays": "Tubig-Mampallam",
+    "type": "Urban",
+    "Population": "7,260",
+    "Total voters": "4,723",
+    "lat":  5.0283163,
+    "lng":   119.7735159
+  },
+  {
+    "Barangays": "Tubig Tanah",
+    "type": "Urban",
+    "Population": "7,167",
+    "Total voters": "4,435",
+    "lat":  5.0210459,
+    "lng":   119.774578
+  },
+  {
+    "Barangays": "Sanga-sanga",
+    "type": "Rural",
+    "Population": "5,151",
+    "Total voters": "2,820"
+    ,
+    "lat":  5.0366171,
+    "lng":   119.7416409
+  },
+  {
+    "Barangays": "Pasiagan",
+    "type": "Rural",
+    "Population": "4,425",
+    "Total voters": "3,182",
+    "lat":  5.0088469,
+    "lng":   119.7503745
+  },
+  {
+    "Barangays": "Luuk Pandan",
+    "type": "Rural",
+    "Population": "3,046",
+    "Total voters": "1,378",
+    "lat":  5.0569829,
+    "lng":   119.7595898
+  },
+  {
+    "Barangays": "Tarawakan",
+    "type": "Rural",
+    "Population": "2,975",
+    "Total voters": "680",
+    "lat": 5.1440667,
+    "lng":   119.8888334
+  },
+  {
+    "Barangays": "Lapid Lapid",
+    "type": "Rural",
+    "Population": "2,566",
+    "Total voters": "819",
+    "lat": 5.1037078,
+    "lng":   119.8315234
+  },
+  {
+    "Barangays": "Karungdong",
+    "type": "Rural",
+    "Population": "2,512",
+    "Total voters": "1,942" ,
+    "lat":  5.0460315,
+    "lng":   119.7706025
+  },
+  {
+    "Barangays": "Pahut",
+    "type": "Rural",
+    "Population": "2,266",
+    "Total voters": "1,921",
+    "lat":  5.0213301,
+    "lng":   119.7377535
+  },
+  {
+    "Barangays": "Pababag",
+    "type": "Rural",
+    "Population": "2,206",
+    "Total voters": "1,379",
+    "lat":   5.035722,
+    "lng":  119.8003931
+  },
+  {
+    "Barangays": "Mandulan",
+    "type": "Rural",
+    "Population": "2,128",
+    "Total voters": "1,247",
+    "lat":  5.0980356,
+    "lng":   119.7891738
+  },
+  {
+    "Barangays": "Tubig Basag",
+    "type": "Rural",
+    "Population": "2,059",
+    "Total voters": "1,675",
+    "lat":  5.0593239,
+    "lng":    119.7499846
+  },
+  {
+    "Barangays": "Silubog",
+    "type": "Rural",
+    "Population": "1,972",
+    "Total voters": "940" ,
+    "lat":   5.1377503,
+    "lng":  119.8547404
+  },
+  {
+    "Barangays": "Ipil",
+    "type": "Rural",
+    "Population": "1,792",
+    "Total voters": "525" ,
+    "lat":  5.0746893,
+    "lng": 119.8529289
+  },
+  {
+    "Barangays": "Pakias",
+    "type": "Rural",
+    "Population": "1,789",
+    "Total voters": "719",
+    "lat":  5.0389377,
+    "lng":     119.7567579
+  },
+  {
+    "Barangays": "Montay Montay",
+    "type": "Rural",
+    "Population": "1,701",
+    "Total voters": "1,069",
+    "lat":  5.086594,
+    "lng":   119.8308147
+  },
+  {
+    "Barangays": "Lakit Lakit",
+    "type": "Rural",
+    "Population": "1,661",
+    "Total voters": "1,331",
+    "lat":  5.0784349,
+    "lng":   119.7571557
+  },
+  {
+    "Barangays": "Kamagong",
+    "type": "Rural",
+    "Population": "1,605",
+    "Total voters": "439" ,
+    "lat":  5.1249743,
+    "lng":   119.8809408
+  },
+  {
+    "Barangays": "Malassa",
+    "type": "Rural",
+    "Population": "1,566",
+    "Total voters": "745",
+    "lat": 5.059677,
+    "lng":   119.8119333
+  },
+  {
+    "Barangays": "Sumangat",
+    "type": "Rural",
+    "Population": "1,466",
+    "Total voters": "672",
+    "lat":  5.1379164,
+    "lng":   119.840023
+  },
+  {
+    "Barangays": "Tongsinah",
+    "type": "Rural",
+    "Population": "1,407",
+    "Total voters": "933",
+    "lat":   5.0370442,
+    "lng":   119.7785868
+  },
+  {
+    "Barangays": "Ungus-ungus",
+    "type": "Rural",
+    "Population": "1,310",
+    "Total voters": "492",
+    "lat":  5.05062,
+    "lng":   119.8508156
+  },
+  {
+    "Barangays": "Paniongan",
+    "type": "Rural",
+    "Population": "1,290",
+    "Total voters": "515",
+    "lat":  5.0426196,
+    "lng":   119.784778
+  },
+  {
+    "Barangays": "Luuk Tulay",
+    "type": "Rural",
+    "Population": "1,206",
+    "Total voters": "528",
+    "lat":  5.1304749,
+    "lng":  119.8250951
+  },
+  {
+    "Barangays": "Lato Lato",
+    "type": "Rural",
+    "Population": "1,203",
+    "Total voters": "808",
+    "lat":  5.0537816,
+    "lng":   119.7862632
+  },
+  {
+    "Barangays": "Masantong",
+    "type": "Rural",
+    "Population": "1,202",
+    "Total voters": "379",
+    "lat": 5.0756637,
+    "lng":  119.7936889
+  },
+  {
+    "Barangays": "Lagasan",
+    "type": "Rural",
+    "Population": "1,121",
+    "Total voters": "560",
+    "lat":  5.03149433,
+    "lng":   119.7930525
+  },
+  {
+    "Barangays": "Pagatpat",
+    "type": "Rural",
+    "Population": "1,058",
+    "Total voters": "789",
+    "lat":  5.0609574,
+    "lng":    119.8254858
+  },
+  {
+    "Barangays": "Pagasinan",
+    "type": "Rural",
+    "Population": "944",
+    "Total voters": "1,467",
+    "lat":  5.0361311,
+    "lng":   119.7458959
+  }
+]
