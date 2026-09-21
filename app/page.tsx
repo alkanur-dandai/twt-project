@@ -12,14 +12,14 @@ export default function Home() {
 
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/bg.png')",
         }}
       />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="pointer-events-none absolute inset-0 bg-black/70" />
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
@@ -36,7 +36,7 @@ export default function Home() {
           </h1>
 
           {/* Description */}
-<p className="mx-auto mt-6 max-w-2xl text-base font-normal leading-7 tracking-wide text-[#FFF9F2]/90 sm:text-lg md:text-xl">
+          <p className="mx-auto mt-6 max-w-2xl text-base font-normal leading-7 tracking-wide text-[#FFF9F2]/90 sm:text-lg md:text-xl">
             Discover barangays, locations, population information,
             and geographic data through an interactive map of
             Tawi-Tawi.
@@ -45,8 +45,9 @@ export default function Home() {
           {/* Button */}
           <div className="mt-8 flex justify-center">
             <Button
+              type="button"
               size="lg"
-              className="gap-2 rounded-full px-7 text-base font-semibold shadow-xl"
+              className="relative z-20 touch-manipulation gap-2 rounded-full px-7 text-base font-semibold shadow-xl"
               onClick={() => router.push("/map")}
             >
               <Map className="size-5" />
@@ -55,7 +56,7 @@ export default function Home() {
           </div>
 
           {/* Disclaimer */}
-      <p className="mx-auto mt-6  text-base font-normal leading-5 tracking-wide text-[#FFF9F2]/90 sm:text-lg">
+          <p className="mx-auto mt-6 text-base font-normal leading-5 tracking-wide text-[#FFF9F2]/90 sm:text-lg">
             This is a personal project created for educational and
             portfolio purposes. It is not affiliated with, intended
             to replace, or intended to compete with any government
@@ -66,7 +67,6 @@ export default function Home() {
 
         </div>
       </div>
-
     </main>
   );
 }
