@@ -23,6 +23,7 @@ import barangayData from "@/data/brgyData.json";
 
 import {getPopulationColor} from "@/utils/populationColor";
 import { DateTimeDisplay } from "@/components/ui/date";
+
 // =====================================================
 // MAP STYLES
 // =====================================================
@@ -370,7 +371,20 @@ export default function MapPage() {
             SEARCH
         ================================================= */}
 
-        <div className="absolute left-4 top-4 z-50 w-[320px] sm:w-[380px]">
+        <div
+          className="
+            absolute
+            left-2
+            right-2
+            top-2
+            z-50
+            w-auto
+            sm:left-4
+            sm:right-auto
+            sm:top-4
+            sm:w-[380px]
+          "
+        >
 
           <div className="relative">
 
@@ -400,12 +414,13 @@ export default function MapPage() {
               }}
               placeholder="Search barangay..."
               className="
-                h-12
+                h-11
                 bg-background
                 pl-10
                 pr-10
                 text-base
                 shadow-lg
+                sm:h-12
               "
             />
 
@@ -445,6 +460,8 @@ export default function MapPage() {
             <div
               className="
                 mt-2
+                max-h-[50vh]
+                overflow-y-auto
                 overflow-hidden
                 rounded-lg
                 border
@@ -481,22 +498,25 @@ export default function MapPage() {
                       }
                       className="
                         flex
+                        min-h-12
                         w-full
                         items-center
                         justify-between
+                        gap-3
                         px-4
                         py-3
                         text-left
                         text-sm
                         hover:bg-muted
+                        active:bg-muted
                       "
                     >
 
-                      <span className="font-medium">
+                      <span className="min-w-0 truncate font-medium">
                         {name}
                       </span>
 
-                      <span className="text-xs text-muted-foreground">
+                      <span className="shrink-0 text-xs text-muted-foreground">
                         {population}
                       </span>
 
@@ -518,7 +538,16 @@ export default function MapPage() {
             MAP STYLE
         ================================================= */}
 
-        <div className="absolute right-4 top-4 z-50">
+        <div
+          className="
+            absolute
+            right-2
+            top-[4.5rem]
+            z-50
+            sm:right-4
+            sm:top-4
+          "
+        >
 
           <select
             value={style}
@@ -528,15 +557,19 @@ export default function MapPage() {
               )
             }
             className="
+              max-w-[145px]
               rounded-md
               border
               bg-background
-              px-3
+              px-2
               py-2
-              text-sm
+              text-xs
               text-foreground
               shadow-lg
               outline-none
+              sm:max-w-none
+              sm:px-3
+              sm:text-sm
             "
           >
 
@@ -561,7 +594,16 @@ export default function MapPage() {
             POPULATION BUTTON
         ================================================= */}
 
-        <div className="absolute right-4 top-16 z-50">
+        <div
+          className="
+            absolute
+            right-2
+            top-[7.5rem]
+            z-50
+            sm:right-4
+            sm:top-16
+          "
+        >
 
           <Button
             type="button"
@@ -571,10 +613,14 @@ export default function MapPage() {
                 : "secondary"
             }
             className="
-          
-              h-10
+              h-9
               gap-2
+              px-3
+              text-xs
               shadow-lg
+              sm:h-10
+              sm:px-4
+              sm:text-sm
             "
             onClick={() =>
               setShowPopulation(
@@ -585,9 +631,11 @@ export default function MapPage() {
 
             <Users className="size-4" />
 
-            {showPopulation
-              ? "Hide Population"
-              : "Population"}
+            <span className="sm:inline">
+              {showPopulation
+                ? "Hide Population"
+                : "Population"}
+            </span>
 
           </Button>
 
@@ -745,29 +793,43 @@ export default function MapPage() {
             className="
               pointer-events-none
               absolute
-              left-1/2
+              left-2
+              right-2
               top-20
               z-[100]
-              -translate-x-1/2
+              flex
+              justify-center
+              sm:left-1/2
+              sm:right-auto
+              sm:top-20
+              sm:-translate-x-1/2
             "
           >
 
             <div
               className="
+                w-full
+                max-w-[calc(100vw-1rem)]
                 rounded-xl
                 border
                 bg-background
-                px-5
-                py-4
+                px-4
+                py-3
                 shadow-xl
+                sm:w-auto
+                sm:max-w-none
+                sm:px-5
+                sm:py-4
               "
             >
 
               <p
                 className="
-                  text-lg
+                  truncate
+                  text-base
                   font-semibold
                   text-blue-600
+                  sm:text-lg
                 "
               >
                 {
@@ -781,8 +843,9 @@ export default function MapPage() {
               <p
                 className="
                   mt-1
-                  text-sm
+                  text-xs
                   text-muted-foreground
+                  sm:text-sm
                 "
               >
                 Population:{" "}
@@ -813,23 +876,29 @@ export default function MapPage() {
           <div
             className="
               absolute
-              bottom-6
-              right-4
+              bottom-20
+              right-2
               z-50
+              max-w-[calc(100vw-1rem)]
               rounded-lg
               border
               bg-background/95
-              p-4
+              p-3
               shadow-xl
               backdrop-blur
+              sm:bottom-6
+              sm:right-4
+              sm:p-4
             "
           >
 
             <p
               className="
-                mb-3
-                text-sm
+                mb-2
+                text-xs
                 font-semibold
+                sm:mb-3
+                sm:text-sm
               "
             >
               Population
@@ -838,8 +907,10 @@ export default function MapPage() {
 
             <div
               className="
-                space-y-2
-                text-xs
+                space-y-1.5
+                text-[11px]
+                sm:space-y-2
+                sm:text-xs
               "
             >
 
@@ -848,7 +919,7 @@ export default function MapPage() {
               <div className="flex items-center gap-2">
 
                 <span
-                  className="size-3 rounded-sm"
+                  className="size-3 shrink-0 rounded-sm"
                   style={{
                     backgroundColor:
                       "#dc2626",
@@ -867,7 +938,7 @@ export default function MapPage() {
               <div className="flex items-center gap-2">
 
                 <span
-                  className="size-3 rounded-sm"
+                  className="size-3 shrink-0 rounded-sm"
                   style={{
                     backgroundColor:
                       "#f97316",
@@ -886,7 +957,7 @@ export default function MapPage() {
               <div className="flex items-center gap-2">
 
                 <span
-                  className="size-3 rounded-sm"
+                  className="size-3 shrink-0 rounded-sm"
                   style={{
                     backgroundColor:
                       "#eab308",
@@ -905,7 +976,7 @@ export default function MapPage() {
               <div className="flex items-center gap-2">
 
                 <span
-                  className="size-3 rounded-sm"
+                  className="size-3 shrink-0 rounded-sm"
                   style={{
                     backgroundColor:
                       "#22c55e",
@@ -924,9 +995,26 @@ export default function MapPage() {
 
         )}
 
-<div className="absolute bottom-6 left-4 z-50">
-  <DateTimeDisplay />
-</div>
+
+        {/* =================================================
+            DATE AND TIME
+        ================================================= */}
+
+        <div
+          className="
+            absolute
+            bottom-2
+            left-2
+            z-50
+            max-w-[calc(100vw-1rem)]
+            sm:bottom-6
+            sm:left-4
+          "
+        >
+          <DateTimeDisplay />
+        </div>
+
+
         {/* =================================================
             BARANGAY MARKERS
         ================================================= */}
@@ -969,12 +1057,13 @@ export default function MapPage() {
 
                   <div
                     className="
-                      size-4
+                      size-3
                       rounded-full
                       border-2
                       border-white
                       bg-blue-500
                       shadow-lg
+                      sm:size-4
                     "
                   />
 
@@ -992,11 +1081,13 @@ export default function MapPage() {
 
                   <div
                     className="
+                      max-w-[260px]
                       space-y-2
+                      sm:max-w-none
                     "
                   >
 
-                    <p className="font-medium text-lg text-blue-500  font-semibold">
+                    <p className="text-base font-semibold text-blue-500 sm:text-lg">
                       {location.Barangays}
                     </p>
 
