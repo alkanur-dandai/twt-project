@@ -22,6 +22,7 @@ import { barangays } from "@/data/brgy";
 import barangayData from "@/data/brgyData.json";
 
 import {getPopulationColor} from "@/utils/populationColor";
+import { DateTimeDisplay } from "@/components/ui/date";
 // =====================================================
 // MAP STYLES
 // =====================================================
@@ -766,7 +767,7 @@ export default function MapPage() {
                 className="
                   text-lg
                   font-semibold
-                  text-green-600
+                  text-blue-600
                 "
               >
                 {
@@ -923,7 +924,9 @@ export default function MapPage() {
 
         )}
 
-
+<div className="absolute bottom-6 left-4 z-50">
+  <DateTimeDisplay />
+</div>
         {/* =================================================
             BARANGAY MARKERS
         ================================================= */}
@@ -993,7 +996,7 @@ export default function MapPage() {
                     "
                   >
 
-                    <p className="font-medium">
+                    <p className="font-medium text-lg text-blue-500  font-semibold">
                       {location.Barangays}
                     </p>
 
