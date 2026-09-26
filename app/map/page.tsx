@@ -50,7 +50,7 @@
 //     () => (hoveredName ? barangays.features.find((f) => f.properties?.adm4_en === hoveredName) ?? null : null),
 //     [hoveredName]
 //   );
-  
+
 
 //   const selectedFeature = useMemo(
 //     () => (selectedName ? barangays.features.find((f) => f.properties?.adm4_en === selectedName) ?? null : null),
@@ -241,16 +241,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  Map,
-  MapControls,
-  MapGeoJSON,
-  MapMarker,
-  MarkerContent,
-  MarkerPopup,
-  MarkerTooltip,
-  type MapRef,
-} from "@/components/ui/map";
+import { Map, MapControls, MapGeoJSON, MapMarker, MarkerContent, MarkerPopup, MarkerTooltip, type MapRef } from "@/components/ui/map";
 import { DateTimeDisplay } from "@/components/ui/date";
 
 import { barangays, panglimasugala } from "@/data/brgy";
@@ -258,6 +249,7 @@ import barangayData from "@/data/brgyData.json";
 import { getBarangayPopulation } from "@/utils/getBarangayPop";
 import { getPopulationColor } from "@/utils/populationColor";
 import { getFeatureBounds } from "@/utils/geoUtils";
+import { extractMunicipalities } from "@/utils/mapUtils";
 import { MAP_STYLES, type StyleKey } from "@/lib/baseMap";
 
 import { BarangaySearch } from "@/components/mapUI/BarangaySearch";
@@ -278,87 +270,54 @@ export default function MapPage() {
   const is3D = style === "openstreetmap3d";
 
   useEffect(() => {
-    // Safe execution for mobile map initialization
-    try {
-      mapRef.current?.easeTo({ pitch: is3D ? 60 : 0, duration: 500 });
-    } catch {
-      // Map instance might not be ready yet on slower mobile CPUs
-    }
-
-    // Mobile WebGL Canvas resize trigger for dynamic viewport shifts
-    const timer = setTimeout(() => {
-      mapRef.current?.resize?.();
-    }, 300);
-
-    return () => clearTimeout(timer);
+    mapRef.current?.easeTo({ pitch: is3D ? 60 : 0, duration: 500 });
   }, [is3D]);
 
-  const municipalities = ["Bongao", "Panglima Sugala"];
-
+  // const municipalities = useMemo(() => extractMunicipalities(barangays.features), []);
+  const municipalities = [
+    "Bongao",
+    "Panglima Sugala",
+  ];
   const searchResults = useMemo(() => {
     const value = search.trim().toLowerCase();
     if (!value) return [];
     return barangays.features
-      .filter(
-        (f) =>
-          typeof f.properties?.adm4_en === "string" &&
-          f.properties.adm4_en.toLowerCase().includes(value)
-      )
+      .filter((f) => typeof f.properties?.adm4_en === "string" && f.properties.adm4_en.toLowerCase().includes(value))
       .slice(0, 8);
   }, [search]);
 
-  // Inject population styling directly into FeatureCollection properties
-  // to avoid rendering multiple MapGeoJSON components.
-  const styledBarangays = useMemo(() => {
-    const allFeatures = [
-      ...barangays.features,
-      ...panglimasugala.features,
-    ];
+  const hoveredFeature = useMemo(
+    () => (hoveredName ? barangays.features.find((f) => f.properties?.adm4_en === hoveredName) ?? null : null),
+    [hoveredName]
+  );
 
-    return {
-      type: "FeatureCollection" as const,
-      features: allFeatures.map((feature: any) => {
-        const name = feature.properties?.adm4_en;
-        const pop = name ? getBarangayPopulation(name) : 0;
-
-        return {
-          ...feature,
-          properties: {
-            ...feature.properties,
-            fillColor: showPopulation
-              ? getPopulationColor(pop)
-              : "#ffffff",
-            fillOpacity: showPopulation ? 0.45 : 0.05,
-          },
-        };
-      }),
-    };
-  }, [showPopulation]);
-
-  const hoveredFeature = useMemo(() => {
-    if (!hoveredName) return null;
-
-    return (
-      styledBarangays.features.find(
-        (f) => f.properties?.adm4_en === hoveredName
-      ) ?? null
-    );
-  }, [hoveredName, styledBarangays]);
 
   const selectedFeature = useMemo(
-    () =>
-      selectedName
-        ? barangays.features.find((f) => f.properties?.adm4_en === selectedName) ?? null
-        : null,
+    () => (selectedName ? barangays.features.find((f) => f.properties?.adm4_en === selectedName) ?? null : null),
     [selectedName]
   );
 
+
   const municipalityFeature = useMemo(() => {
     if (!selectedMunicipality) return null;
-    if (selectedMunicipality === "Bongao") return barangays;
-    if (selectedMunicipality === "Panglima Sugala") return panglimasugala;
+
+    if (selectedMunicipality === "Bongao") {
+      return barangays;
+    }
+
+    if (selectedMunicipality === "Panglima Sugala") {
+      return panglimasugala;
+    }
+
     return null;
   }, [selectedMunicipality]);
+  // const municipalityFeature = useMemo(() => {
+  //   if (!selectedMunicipality) return null;
+  //   const features = barangays.features.filter(
+  //     (f: any) => f.properties?.municipality?.toLowerCase() === selectedMunicipality.toLowerCase()
+  //   );
+  //   return features.length ? ({ type: "FeatureCollection" as const, features } as const) : null;
+  // }, [selectedMunicipality]);
 
   const selectBarangay = (feature: any) => {
     const name = feature.properties?.adm4_en;
@@ -367,14 +326,16 @@ export default function MapPage() {
     setSearch(name);
 
     const bounds = getFeatureBounds(feature);
-    if (bounds)
-      mapRef.current?.fitBounds(bounds, { padding: 40, duration: 1000, maxZoom: 14 });
+    if (bounds) mapRef.current?.fitBounds(bounds, { padding: 80, duration: 1000, maxZoom: 14 });
   };
 
-  const municipalityColor = municipalityColors[selectedMunicipality ?? "Bongao"];
+  const municipalityColor =
+    municipalityColors[
+    selectedMunicipality ?? "Bongao"
+    ];
 
   return (
-    <main className="fixed inset-0 h-screen h-[100dvh] w-full overflow-hidden">
+    <main className="relative h-screen w-full overflow-hidden">
       <Map
         ref={mapRef}
         center={[119.7657797, 5.0245908]}
@@ -402,25 +363,28 @@ export default function MapPage() {
           municipalities={municipalities}
         />
 
-        {/* Combined Single GeoJSON Layer */}
-        <MapGeoJSON
-          data={styledBarangays}
-          interactive
-          onHover={(e) => {
-            // Prevent high-frequency state updates on touch devices
-            if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-              return;
-            }
-            setHoveredName(e?.feature?.properties?.adm4_en ?? null);
-          }}
-          fillPaint={{
-            "fill-color": ["get", "fillColor"],
-            "fill-opacity": ["get", "fillOpacity"],
-          }}
-          linePaint={{ "line-color": "#eeeded00", "line-width": 1 }}
-        />
+        {/* Polygons */}
+        {barangays.features.map((feature: any) => {
+          const name = feature.properties?.adm4_en;
+          if (!name) return null;
+          const pop = getBarangayPopulation(name);
+          return (
+            <MapGeoJSON
+              key={name}
+              data={{ type: "FeatureCollection", features: [feature] }}
+              interactive
+              onHover={(e) => setHoveredName(e?.feature?.properties?.adm4_en ?? null)}
+              fillPaint={{
+                "fill-color": showPopulation ? getPopulationColor(pop) : "#ffffff",
+                "fill-opacity": showPopulation ? 0.45 : 0.05,
+              }}
+              linePaint={{ "line-color": "#e9e7e700", "line-width": 1 }}
+            />
+          );
+        })}
 
-        {/* Hover Highlight */}
+        {/* Highlight Layers */}
+        {/* Highlight Layers */}
         {hoveredFeature && (
           <MapGeoJSON
             data={{
@@ -441,30 +405,32 @@ export default function MapPage() {
 
         {/* Hover Name Card */}
         {hoveredFeature && (
-          <div className="pointer-events-none absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white px-4 py-2 shadow-lg">
+          <div className="absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white px-4 py-2 shadow-lg">
             <p className="text-sm font-semibold text-gray-900">
               {hoveredFeature.properties?.adm4_en}
             </p>
           </div>
         )}
 
-        {/* Municipality Highlight Layer */}
         {municipalityFeature && (
           <MapGeoJSON
             data={municipalityFeature}
             interactive={false}
             fillPaint={{
-              "fill-color": municipalityColor.fill,
+              "fill-color":
+                municipalityColor.fill,
+
               "fill-opacity": 0.7,
             }}
             linePaint={{
-              "line-color": municipalityColor.line,
+              "line-color":
+                municipalityColor.line,
+
               "line-width": 1,
             }}
           />
         )}
 
-        {/* Selected Barangay Highlight */}
         {selectedFeature && (
           <MapGeoJSON
             data={{ type: "FeatureCollection", features: [selectedFeature] }}
@@ -474,14 +440,13 @@ export default function MapPage() {
           />
         )}
 
-        {/* Legends & Controls */}
+        {/* Legends & Markers */}
         {showPopulation && <PopulationLegend />}
 
         <div className="absolute bottom-2 left-2 z-50 max-w-[calc(100vw-1rem)] sm:bottom-6 sm:left-4">
           <DateTimeDisplay />
         </div>
 
-        {/* Markers */}
         {barangayData.map((location: any) => {
           const lat = Number(location.lat);
           const lng = Number(location.lng);
@@ -495,9 +460,7 @@ export default function MapPage() {
               <MarkerTooltip>{location.Barangays}</MarkerTooltip>
               <MarkerPopup>
                 <div className="max-w-[260px] space-y-2 sm:max-w-none">
-                  <p className="text-base font-semibold text-blue-500 sm:text-lg">
-                    {location.Barangays}
-                  </p>
+                  <p className="text-base font-semibold text-blue-500 sm:text-lg">{location.Barangays}</p>
                   <p className="text-sm">Population: {location.Population}</p>
                   <p className="text-sm">Type: {location.type}</p>
                   <p className="text-sm">Total voters: {location["Total voters"]}</p>
