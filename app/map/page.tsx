@@ -238,7 +238,6 @@
 
 
 
-
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -279,7 +278,12 @@ export default function MapPage() {
   const is3D = style === "openstreetmap3d";
 
   useEffect(() => {
-    mapRef.current?.easeTo({ pitch: is3D ? 60 : 0, duration: 500 });
+    // Safe execution for mobile map initialization
+    try {
+      mapRef.current?.easeTo({ pitch: is3D ? 60 : 0, duration: 500 });
+    } catch {
+      // Map instance might not be ready yet on slower mobile CPUs
+    }
 
     // Mobile WebGL Canvas resize trigger for dynamic viewport shifts
     const timer = setTimeout(() => {
@@ -305,41 +309,41 @@ export default function MapPage() {
 
   // Inject population styling directly into FeatureCollection properties
   // to avoid rendering multiple MapGeoJSON components.
-const styledBarangays = useMemo(() => {
-  const allFeatures = [
-    ...barangays.features,
-    ...panglimasugala.features,
-  ];
+  const styledBarangays = useMemo(() => {
+    const allFeatures = [
+      ...barangays.features,
+      ...panglimasugala.features,
+    ];
 
-  return {
-    type: "FeatureCollection" as const,
-    features: allFeatures.map((feature: any) => {
-      const name = feature.properties?.adm4_en;
-      const pop = name ? getBarangayPopulation(name) : 0;
+    return {
+      type: "FeatureCollection" as const,
+      features: allFeatures.map((feature: any) => {
+        const name = feature.properties?.adm4_en;
+        const pop = name ? getBarangayPopulation(name) : 0;
 
-      return {
-        ...feature,
-        properties: {
-          ...feature.properties,
-          fillColor: showPopulation
-            ? getPopulationColor(pop)
-            : "#ffffff",
-          fillOpacity: showPopulation ? 0.45 : 0.05,
-        },
-      };
-    }),
-  };
-}, [showPopulation]);
+        return {
+          ...feature,
+          properties: {
+            ...feature.properties,
+            fillColor: showPopulation
+              ? getPopulationColor(pop)
+              : "#ffffff",
+            fillOpacity: showPopulation ? 0.45 : 0.05,
+          },
+        };
+      }),
+    };
+  }, [showPopulation]);
 
- const hoveredFeature = useMemo(() => {
-  if (!hoveredName) return null;
+  const hoveredFeature = useMemo(() => {
+    if (!hoveredName) return null;
 
-  return (
-    styledBarangays.features.find(
-      (f) => f.properties?.adm4_en === hoveredName
-    ) ?? null
-  );
-}, [hoveredName, styledBarangays]);
+    return (
+      styledBarangays.features.find(
+        (f) => f.properties?.adm4_en === hoveredName
+      ) ?? null
+    );
+  }, [hoveredName, styledBarangays]);
 
   const selectedFeature = useMemo(
     () =>
@@ -370,7 +374,7 @@ const styledBarangays = useMemo(() => {
   const municipalityColor = municipalityColors[selectedMunicipality ?? "Bongao"];
 
   return (
-    <main className="relative h-[100dvh] w-full overflow-hidden">
+    <main className="fixed inset-0 h-screen h-[100dvh] w-full overflow-hidden">
       <Map
         ref={mapRef}
         center={[119.7657797, 5.0245908]}
@@ -402,7 +406,13 @@ const styledBarangays = useMemo(() => {
         <MapGeoJSON
           data={styledBarangays}
           interactive
-          onHover={(e) => setHoveredName(e?.feature?.properties?.adm4_en ?? null)}
+          onHover={(e) => {
+            // Prevent high-frequency state updates on touch devices
+            if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+              return;
+            }
+            setHoveredName(e?.feature?.properties?.adm4_en ?? null);
+          }}
           fillPaint={{
             "fill-color": ["get", "fillColor"],
             "fill-opacity": ["get", "fillOpacity"],
