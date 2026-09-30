@@ -8,8 +8,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Map, MapControls, MapGeoJSON, MapMarker, MarkerContent, MarkerPopup, MarkerTooltip, type MapRef } from "@/components/ui/map";
 import { DateTimeDisplay } from "@/components/ui/date";
 
-import { barangays, panglimasugala } from "@/data/brgy";
-import barangayData from "@/data/brgyData.json";
+import { barangays, panglimasugala, Languyan, Tandubas, SapaSapa } from "@/data/brgy";
+import barangayData  from "@/data/brgyData.json";
 import { getBarangayPopulation } from "@/utils/getBarangayPop";
 import { getPopulationColor } from "@/utils/populationColor";
 import { getFeatureBounds } from "@/utils/geoUtils";
@@ -45,6 +45,9 @@ export default function MapPage() {
   const municipalities = [
     "Bongao",
     "Panglima Sugala",
+    "Languyan",
+    "Tandubas",
+    "SapaSapa"
   ];
   const searchResults = useMemo(() => {
     const value = search.trim().toLowerCase();
@@ -82,6 +85,16 @@ const hoveredFeature = useMemo(() => {
     if (selectedMunicipality === "Panglima Sugala") {
       return panglimasugala;
     }
+    if (selectedMunicipality === "Languyan") {
+      return Languyan;
+    }
+     if (selectedMunicipality === "Tandubas") {
+      return Tandubas;
+    }
+    if (selectedMunicipality === "SapaSapa") {
+      return SapaSapa;
+    }
+   
 
     return null;
   }, [selectedMunicipality]);
@@ -176,7 +189,7 @@ const hoveredFeature = useMemo(() => {
               : 0.05,
         }}
         linePaint={{
-          "line-color": "#f5eeee04",
+          "line-color": "#1d010104",
           "line-width": 1,
         }}
       />

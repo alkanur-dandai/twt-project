@@ -32,7 +32,7 @@ export const municipalityColors: Record<
 
   Tandubas: {
     fill: "#f97316",
-    line: "#c2410c",
+    line: "#faf6f5",
   },
 
   "Turtle Islands": {
@@ -46,13 +46,13 @@ export const municipalityColors: Record<
   },
 
   "Languyan": {
-    fill: "#14b8a6",
-    line: "#0f766e",
+    fill: "#009e12",
+    line: "#f6fdfc",
   },
 
-  "Sapa-Sapa": {
+  "SapaSapa": {
     fill: "#8b5cf6",
-    line: "#6d28d9",
+    line: "#ece9f2",
   },
 
   "Sibutu": {
