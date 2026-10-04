@@ -15,33 +15,33 @@ export const municipalityColors: Record<
     line: "#ffffff",
   },
 
-  Simunul: {
-    fill: "#22c55e",
-    line: "#15803d",
+  "simunul": {
+    fill: "#1ee56e",
+    line: "#deebe3",
   },
 
-  Sitangkai: {
+  "sitangkai": {
     fill: "#eab308",
     line: "#a16207",
   },
 
-  "South Ubian": {
-    fill: "#a855f7",
-    line: "#7e22ce",
+  "Southubian": {
+    fill: "#f06209",
+    line: "#f7f4f9",
   },
 
-  Tandubas: {
+  "Tandubas": {
     fill: "#f97316",
     line: "#faf6f5",
   },
 
-  "Turtle Islands": {
+  "turtle": {
     fill: "#06b6d4",
     line: "#0e7490",
   },
 
-  "Mapun": {
-    fill: "#ec4899",
+  "mapun": {
+    fill: "#f74ba1",
     line: "#be185d",
   },
 
@@ -55,7 +55,7 @@ export const municipalityColors: Record<
     line: "#ece9f2",
   },
 
-  "Sibutu": {
+  "sibutu": {
     fill: "#84cc16",
     line: "#4d7c0f",
   },

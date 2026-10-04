@@ -33,6 +33,7 @@ export function MapControlsOverlay({
         <option value="default">Default (Carto)</option>
         <option value="openstreetmap">OpenStreetMap</option>
         <option value="openstreetmap3d">OpenStreetMap 3D</option>
+        
       </select>
 
       {/* Population Toggle */}

@@ -1,11 +1,17 @@
-import { barangays, panglimasugala, Languyan, Tandubas, SapaSapa } from "@/data/brgy";
+import { barangays, panglimasugala, Languyan, Tandubas, SapaSapa, Southubian, simunul, sitangkai, sibutu, mapun,  turtle } from "@/data/brgy";
 
 export const geoJsonLayers = [
   barangays,
   panglimasugala,
   Languyan,
   Tandubas,
-  SapaSapa
+  SapaSapa,
+  Southubian,
+  simunul,
+  sitangkai,
+  sibutu,
+  mapun,
+  turtle
 ];
 
 export const allFeatures = geoJsonLayers.flatMap(
